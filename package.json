@@ -1,0 +1,34 @@
+{
+  "name": "fn-proxy",
+  "version": "0.0.0",
+  "description": "Simple function proxying.",
+  "main": "lib/fn-proxy.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jasmine-node spec/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TGOlson/fn-proxy.git"
+  },
+  "keywords": [
+    "proxy",
+    "function",
+    "proxy",
+    "point-free",
+    "resursion",
+    "functional",
+    "programming"
+  ],
+  "author": "Tyler Olson",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TGOlson/fn-proxy/issues"
+  },
+  "homepage": "https://github.com/TGOlson/fn-proxy",
+  "dependencies": {
+    "ramda": "^0.11.0"
+  }
+}
