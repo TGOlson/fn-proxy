@@ -1,6 +1,6 @@
 # fn-proxy
 
-Simple function proxying.
+Simple function proxying. Allows for point-free recursion in JavaScrpipt, and simulation of lazy function evaluation.
 
 ### Install
 
@@ -16,18 +16,13 @@ $ npm test
 
 ### Usage
 
-
-Use `fn-proxy` to allow for point-free recursion in JavaScrpipt, or to simulate lazy evaluation.
-
-`fn-proxy` takes in a function name and declaration, and returns a proxy to the original function.
-
-#### Examples
-
 Require the module
 
 ```js
 var proxy = require('fn-proxy');
 ```
+
+##### Examples
 
 (all example use point free style functions, something like `ramda` or `lodash` would provide)
 
@@ -40,6 +35,9 @@ var length = ifElse(
 );
 
 proxy('length', length);
+
+length([]) // => 0
+length([1, 2, 3, 4]) // => 4
 ```
 
 * Short had proxy chaining
@@ -49,6 +47,9 @@ var length = ifElse(
   isEmpty, always(0),
   compose(inc, proxy('length'), tail)
 ).proxy('length');
+
+length([]) // => 0
+length([1, 2, 3, 4]) // => 4
 ```
 
 * Wrap declaration with proxy
@@ -58,6 +59,9 @@ var length = proxy('length', ifElse(
   isEmpty, always(0),
   compose(inc, proxy('length'), tail)
 ));
+
+length([]) // => 0
+length([1, 2, 3, 4]) // => 4
 ```
 * Invoke the proxy directly
 
@@ -67,5 +71,6 @@ proxy('length', ifElse(
   compose(inc, proxy('length'), tail))
 );
 
-proxy('length')(<list>)
+proxy('length')([]) // => 0
+proxy('length')([1, 2, 3, 4]) // => 4
 ```
