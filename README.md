@@ -24,15 +24,12 @@ var proxy = require('fn-proxy');
 
 ##### Examples
 
-(all example use point free style functions, something like `ramda` or `lodash` would provide)
+All examples show a point free recursive strategy for finding the length of a list. This would normally not be possible with regular JavaScript. Also note: examples use point-free style functions, something like `ramda` or `lodash` would provide.
 
 * Explicit proxy - save proxy after declaration
 
 ```js
-var length = ifElse(
-  isEmpty, always(0),
-  compose(inc, proxy('length'), tail)
-);
+var length = ifElse(isEmpty, always(0), compose(inc, proxy('length'), tail));
 
 proxy('length', length);
 
@@ -40,12 +37,11 @@ length([]) // => 0
 length([1, 2, 3, 4]) // => 4
 ```
 
-* Short had proxy chaining
+* Short-hand proxy chaining
 
 ```js
 var length = ifElse(
-  isEmpty, always(0),
-  compose(inc, proxy('length'), tail)
+  isEmpty, always(0), compose(inc, proxy('length'), tail)
 ).proxy('length');
 
 length([]) // => 0
@@ -56,8 +52,7 @@ length([1, 2, 3, 4]) // => 4
 
 ```js
 var length = proxy('length', ifElse(
-  isEmpty, always(0),
-  compose(inc, proxy('length'), tail)
+  isEmpty, always(0), compose(inc, proxy('length'), tail)
 ));
 
 length([]) // => 0
@@ -66,10 +61,7 @@ length([1, 2, 3, 4]) // => 4
 * Invoke the proxy directly
 
 ```js
-proxy('length', ifElse(
-  isEmpty, always(0),
-  compose(inc, proxy('length'), tail))
-);
+proxy('length', ifElse(isEmpty, always(0), compose(inc, proxy('length'), tail)));
 
 proxy('length')([]) // => 0
 proxy('length')([1, 2, 3, 4]) // => 4
